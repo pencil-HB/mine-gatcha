@@ -13,10 +13,12 @@ import Home from "./routes/Home";
 import Reports from "./routes/Reports";
 import Login from "./routes/Login";
 import Navbar from "./components/Navbar";
-import "./App.css";
+import "./css/App.css";
 
 const AppLayout = () => (
     <>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.3.0/dist/themes/light.css" />
+        <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.3.0/dist/shoelace-autoloader.js"></script>
         <Navbar />
         <Outlet />
     </>

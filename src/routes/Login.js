@@ -69,6 +69,7 @@ function Login() {
 
   return (
     <div className="login">
+
       <div>
         <h3> Register User </h3>
         <input
@@ -77,13 +78,14 @@ function Login() {
             setRegisterEmail(event.target.value);
           }}
         />
+        <br/>
         <input
           placeholder="Password..."
           onChange={(event) => {
             setRegisterPassword(event.target.value);
           }}
         />
-
+        <br/>
         <button onClick={register}> Create User</button>
       </div>
 
@@ -95,19 +97,20 @@ function Login() {
             setLoginEmail(event.target.value);
           }}
         />
+        <br/>
         <input
           placeholder="Password..."
           onChange={(event) => {
             setLoginPassword(event.target.value);
           }}
         />
-
+        <br/>
         <button onClick={login}> Login</button>
       </div>
 
       <h4> User Logged In: </h4>
       {user ? user.email : "Not Logged In"}
-
+      <br/>
       <button onClick={logout}> Sign Out </button>
     </div>
   );
