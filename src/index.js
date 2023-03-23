@@ -12,17 +12,19 @@ import Gatcha from "./routes/Gatcha";
 import Home from "./routes/Home";
 import Reports from "./routes/Reports";
 import Login from "./routes/Login";
-import Navbar from "./components/Navbar";
+import Signin from "./routes/Signin";
+//import Navbar from "./components/Navbar";
 import "./css/App.css";
+import './css/bootstrap.min.css';
+import Navbar from "./components/Navbar";
 
 const AppLayout = () => (
     <>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.3.0/dist/themes/light.css" />
-        <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.3.0/dist/shoelace-autoloader.js"></script>
         <Navbar />
-        <Outlet />
+        <Outlet/>
     </>
 );
+
 
 // const router = createBrowserRouter(
 //   createRoutesFromElements(
@@ -43,7 +45,7 @@ const router = createBrowserRouter([
                 element: <Login />,
             },
             {
-                path: "/home",
+                path: "home",
                 element: <Home />,
             },
             {
@@ -53,6 +55,10 @@ const router = createBrowserRouter([
             {
                 path: "reports",
                 element: <Reports />,
+            },
+            {
+                path: "signin",
+                element: <Signin />,
             },
         ],
     },

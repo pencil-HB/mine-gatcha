@@ -22,4 +22,10 @@ export const SidebarData = [
         icons : <FaIcons.FaCartPlus />,
         cName : "nav-text", 
     },
+    {
+        title : "Logout",
+        path: "/",
+        icons : <AiIcons.AiOutlineLogout/>,
+        cName : "nav-text", 
+    }
 ]

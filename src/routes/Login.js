@@ -7,10 +7,10 @@ import {
   signOut,
 } from "firebase/auth";
 import { firebaseAuth } from "../service/firebase";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 function Login() {
-  const [registerEmail, setRegisterEmail] = useState("");
-  const [registerPassword, setRegisterPassword] = useState("");
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const navigate = useNavigate();
@@ -19,27 +19,10 @@ function Login() {
 
   useEffect(() => {
     onAuthStateChanged(firebaseAuth, (currentUser) => {
-        setUser(currentUser);
+      setUser(currentUser);
     });
 
-}, [])
-
-  const register = async () => {
-    try {
-      const user = await createUserWithEmailAndPassword(
-        firebaseAuth,
-        registerEmail,
-        registerPassword
-      );
-      console.log(user);
-    } catch (error) {
-      if(error.message === "Firebase: Error (auth/invalid-email).")
-      alert("올바른 이메일을 입력해주세요.");
-      if(error.message === "Firebase: Error (auth/email-already-in-use).")
-      alert("이미 존재하는 이메일 계정입니다.");
-      console.log(error.message);
-    }
-  };
+  }, [])
 
   const login = async () => {
     try {
@@ -52,66 +35,61 @@ function Login() {
       goToHome(user);
     } catch (error) {
       console.log(error.message);
+      console.log(user);
     }
   };
 
-  const goToHome=user=>{
+  const goToHome = user => {
     navigate({
-        pathname : '/home',
-        state:{userInfo : user},
+      pathname: '/home',
+      state: { userInfo: user },
     })
   }
 
+  const goToSignIn = () => {
+    navigate({
+      pathname: '/signin',
+    })
+  }
 
-  const logout = async () => {
-    await signOut(firebaseAuth);
-  };
+  const openKakao = () => {
+    window.open('https://open.kakao.com/o/sTUOwIgb');
+  }
+
 
   return (
     <div className="login">
 
-      <div>
-        <h3> Register User </h3>
-        <input
-          placeholder="Email..."
-          onChange={(event) => {
-            setRegisterEmail(event.target.value);
-          }}
-        />
-        <br/>
-        <input
-          placeholder="Password..."
-          onChange={(event) => {
-            setRegisterPassword(event.target.value);
-          }}
-        />
-        <br/>
-        <button onClick={register}> Create User</button>
-      </div>
+      <Form>
+      <Form.Text className="text-muted">
+            로그인
+          </Form.Text>
+          <br/>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Control type="email" placeholder="Enter email"
+            onChange={(event) => {
+              setLoginEmail(event.target.value);
+            }}
+          />
+          <br/>
+          <Form.Control type="password" placeholder="Password"
+            onChange={(event) => {
+              setLoginPassword(event.target.value);
+            }}
+          />
+          <br/>
+          <Button variant="primary" onClick={login} >
+            Login
+          </Button>
+          <Form.Text className="text-muted" onClick={goToSignIn}>
+            회원가입하기
+          </Form.Text>
+          <Form.Text className="text-muted" onClick={openKakao}>
+            비밀번호를 잊어버리셨나요?
+          </Form.Text>
+        </Form.Group>
+      </Form>
 
-      <div>
-        <h3> Login </h3>
-        <input
-          placeholder="Email..."
-          onChange={(event) => {
-            setLoginEmail(event.target.value);
-          }}
-        />
-        <br/>
-        <input
-          placeholder="Password..."
-          onChange={(event) => {
-            setLoginPassword(event.target.value);
-          }}
-        />
-        <br/>
-        <button onClick={login}> Login</button>
-      </div>
-
-      <h4> User Logged In: </h4>
-      {user ? user.email : "Not Logged In"}
-      <br/>
-      <button onClick={logout}> Sign Out </button>
     </div>
   );
 }
